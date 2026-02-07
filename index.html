@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Priya ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+:root{
+ --primary:#ff4d6d;
+ --bg:linear-gradient(135deg,#fff0f3,#ffe5ec);
+ --text:#590d22;
+ --heading:'Dancing Script',cursive;
+ --body:'Poppins',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+ font-family:var(--body);
+ background:var(--bg);
+ color:var(--text);
+ min-height:100vh;
+ display:flex;
+ justify-content:center;
+ align-items:center;
+ overflow:hidden;
+}
+
+/* Floating Hearts */
+.floating-hearts{position:fixed;inset:0;pointer-events:none;z-index:-1}
+.heart{position:absolute;bottom:-20px;color:#ff85a2;animation:floatUp linear forwards}
+@keyframes floatUp{to{transform:translateY(-110vh);opacity:0}}
+
+.container{padding:20px;width:100%;max-width:480px}
+
+.glass{
+ background:rgba(255,255,255,.7);
+ backdrop-filter:blur(12px);
+ border-radius:24px;
+ padding:30px 20px;
+ text-align:center;
+ box-shadow:0 8px 32px rgba(255,77,109,.15)
+}
+
+.heading{font-family:var(--heading);font-size:2.6rem;color:var(--primary)}
+.intro{margin:15px 0 25px;color:#888}
+
+/* Romantic Question Style */
+.romantic-text{
+ font-size:2.2rem;
+ font-weight:700;
+ font-family:var(--heading);
+ background:linear-gradient(90deg,#ff4d6d,#ff8fa3,#ff4d6d);
+ background-size:200% auto;
+ color:transparent;
+ -webkit-background-clip:text;
+ background-clip:text;
+ animation:shine 4s linear infinite, floatText 3s ease-in-out infinite;
+ text-shadow:0 0 10px rgba(255,77,109,.3);
+ margin-bottom:35px;
+}
+@keyframes shine{to{background-position:200% center}}
+@keyframes floatText{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+
+.swipe{position:relative;width:100%;height:60px;touch-action:none}
+.track{
+ position:absolute;inset:0;
+ background:rgba(255,255,255,.6);
+ border-radius:50px;border:2px solid #ffcbd6;
+ display:flex;justify-content:space-between;align-items:center;
+ padding:0 20px
+}
+.swipe span{color:var(--primary);font-weight:600;opacity:.7}
+
+.handle{
+ position:absolute;top:5px;left:50%;
+ transform:translateX(-50%);
+ width:50px;height:50px;border-radius:50%;
+ background:var(--primary);color:#fff;
+ display:flex;align-items:center;justify-content:center;
+ font-size:1.5rem;cursor:grab;
+ box-shadow:0 4px 10px rgba(255,77,109,.4)
+}
+
+.hidden{display:none}
+
+.story{
+ margin-top:20px;background:#fff;border-radius:20px;
+ padding:30px;box-shadow:0 10px 40px rgba(0,0,0,.1)
+}
+.message{font-family:var(--heading);font-size:1.7rem;color:var(--primary);min-height:90px}
+
+/* Romantic Names Style */
+.romantic-names{
+ font-family:var(--heading);
+ font-size:2rem;
+ margin-top:18px;
+ background:linear-gradient(90deg,#ff4d6d,#ff8fa3,#ff4d6d);
+ background-size:200% auto;
+ color:transparent;
+ -webkit-background-clip:text;
+ background-clip:text;
+ animation:shineNames 5s linear infinite, pulseGlow 2.5s ease-in-out infinite;
+ letter-spacing:1px;
+}
+@keyframes shineNames{to{background-position:200% center}}
+@keyframes pulseGlow{
+ 0%,100%{text-shadow:0 0 8px rgba(255,77,109,.4)}
+ 50%{text-shadow:0 0 18px rgba(255,77,109,.8)}
+}
+
+.btn{
+ margin-top:15px;width:100%;padding:14px;
+ border:none;border-radius:50px;
+ background:var(--primary);color:#fff;font-weight:600;cursor:pointer;
+ transition:transform .2s
+}
+.btn:active{transform:scale(.96)}
+
+.popup{position:fixed;top:25%;left:50%;transform:translateX(-50%);z-index:999}
+.popup-box{
+ background:#fff;padding:15px 25px;border-radius:50px;
+ border:2px solid #ffccd5;animation:fadePop 2s forwards
+}
+@keyframes fadePop{
+ 0%{opacity:0;transform:translate(-50%,-20px)}
+ 20%{opacity:1;transform:translate(-50%,0)}
+ 80%{opacity:1}
+ 100%{opacity:0;transform:translate(-50%,-20px)}
+}
+
+.music{
+ position:fixed;bottom:15px;right:15px;
+ width:50px;height:50px;border-radius:50%;
+ background:#fff;display:flex;align-items:center;justify-content:center;
+ box-shadow:0 4px 10px rgba(0,0,0,.15);cursor:pointer;font-size:1.4rem
+}
+</style>
+</head>
+
+<body>
+
+<div class="floating-hearts" id="hearts"></div>
+
+<div class="container">
+<div id="proposal" class="glass">
+ <h1 class="heading">Hey Priya...</h1>
+ <p class="intro">I have something to ask you...</p>
+ <div class="romantic-text">Will you be mine forever? 💍</div>
+
+ <div class="swipe" id="swipe">
+  <div class="track">
+   <span>← Nooo</span>
+   <span>Yesss →</span>
+  </div>
+  <div class="handle" id="handle">❤️</div>
+ </div>
+</div>
+
+<div id="celebration" class="hidden">
+ <div class="story">
+  <div class="message" id="typed"></div>
+  <div class="romantic-names">Priya & Sujay</div>
+ </div>
+ <button class="btn">Share on Story ✨</button>
+</div>
+</div>
+
+<div class="popup hidden" id="popup">
+ <div class="popup-box">Nice try 😌 But the answer is YES!</div>
+</div>
+
+<div class="music" id="musicBtn">🎵</div>
+<audio id="bgMusic" loop preload="auto">
+ <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_c8c8a73467.mp3" type="audio/mpeg">
+</audio>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+<script>
+const handle=document.getElementById('handle');
+const swipe=document.getElementById('swipe');
+const proposal=document.getElementById('proposal');
+const celebration=document.getElementById('celebration');
+const typed=document.getElementById('typed');
+let dragging=false,startX=0;
+
+handle.addEventListener('mousedown',e=>{dragging=true;startX=e.clientX});
+handle.addEventListener('touchstart',e=>{dragging=true;startX=e.touches[0].clientX});
+
+window.addEventListener('mousemove',drag);
+window.addEventListener('touchmove',drag);
+
+function drag(e){
+ if(!dragging) return;
+ const x=e.type.includes('touch')?e.touches[0].clientX:e.clientX;
+ const diff=x-startX;
+ const max=swipe.offsetWidth/2-30;
+ const move=Math.max(-max,Math.min(max,diff));
+ handle.style.left=`calc(50% + ${move}px)`;
+
+ if(diff>100){
+  dragging=false;
+  proposal.classList.add('hidden');
+  celebration.classList.remove('hidden');
+  confettiBurst();
+  typeText();
+ }
+ if(diff<-100){
+  dragging=false;
+  const popup=document.getElementById('popup');
+  popup.classList.remove('hidden');
+  setTimeout(()=>popup.classList.add('hidden'),2000);
+  reset();
+ }
+}
+
+window.addEventListener('mouseup',reset);
+window.addEventListener('touchend',reset);
+function reset(){dragging=false;handle.style.left='50%'}
+
+function confettiBurst(){
+ const end=Date.now()+2000;
+ (function frame(){
+  confetti({particleCount:5,spread:70,origin:{y:0.6}});
+  if(Date.now()<end) requestAnimationFrame(frame);
+ })();
+}
+
+function typeText(){
+ const text="I just want you.\nYour flaws. Your mistakes. All of you.\nYou are mine forever. ❤️";
+ let i=0;
+ const t=setInterval(()=>{
+  typed.innerHTML=text.substring(0,i).replace(/\n/g,"<br>");
+  i++; if(i>text.length) clearInterval(t);
+ },40);
+}
+
+const hearts=document.getElementById('hearts');
+setInterval(()=>{
+ const h=document.createElement('div');
+ h.className='heart'; h.innerHTML='❤';
+ h.style.left=Math.random()*100+'vw';
+ h.style.fontSize=(Math.random()*20+10)+'px';
+ h.style.animationDuration=(Math.random()*3+4)+'s';
+ hearts.appendChild(h);
+ setTimeout(()=>h.remove(),7000);
+},500);
+
+const music=document.getElementById('bgMusic');
+const btn=document.getElementById('musicBtn');
+let started=false;
+
+btn.addEventListener('click',()=>{
+ if(!started){
+  music.volume=0.6;
+  music.play().then(()=>{started=true;btn.textContent='🔊';})
+  .catch(()=>alert("Tap again to enable music 🎵"));
+ }else{
+  if(music.paused){music.play();btn.textContent='🔊'}
+  else{music.pause();btn.textContent='🎵'}
+ }
+});
+</script>
+
+</body>
+</html>
